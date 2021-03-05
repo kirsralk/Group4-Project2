@@ -1,8 +1,11 @@
 // Requiring path to so we can use relative routes to our HTML files
 const path = require("path");
+// const express = require("express");
+// const router = express.Router();
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
+// const { monitorEventLoopDelay } = require("perf_hooks");
 
 module.exports = function(app) {
   app.get("/", (req, res) => {
@@ -10,7 +13,7 @@ module.exports = function(app) {
     if (req.user) {
       res.redirect("/members");
     }
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
+    res.render("signup");
   });
 
   app.get("/login", (req, res) => {
@@ -18,7 +21,7 @@ module.exports = function(app) {
     if (req.user) {
       res.redirect("/members");
     }
-    res.sendFile(path.join(__dirname, "../public/login.html"));
+    res.render("index");
   });
 
   // Here we've add our isAuthenticated middleware to this route.
@@ -27,3 +30,4 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
 };
+// module.exports = router;
