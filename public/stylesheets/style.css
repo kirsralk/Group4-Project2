@@ -14,3 +14,31 @@ form.login {
 .bolded {
   font-weight: bold;
 }
+
+.tblEqual {
+  align-content: center;
+  width: 33%;
+  padding-left: 10px;
+}
+
+.pokeball {
+  outline: none !important;
+}
+
+label {
+  cursor: pointer;
+  filter: grayscale(100%);
+}
+
+label:hover {
+  filter: grayscale(0);
+}
+input[type="radio"]:checked + label {
+  filter: grayscale(0);
+}
+
+.starterIcons {
+  height: 150px;
+  margin-left: 10px;
+  margin-right: 10px;
+}

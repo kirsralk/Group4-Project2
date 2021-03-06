@@ -16,17 +16,29 @@
     </div>
 
     <!--New Pokemon will generate here from the DB-->
-    <div class="row" height="100px">
+    <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <h3 align="center">A wild <span class="bolded"></span> appeared!</h3>
+        <h3 align="center">A wild <span class="bolded" id="new-poke-name"></span> appeared!</h3>
+        <p align="center"><img src="https://via.placeholder.com/150" /></p>
+        <br />
+        <table class="table-borderless" align="center" style="table-layout: fixed; color: black;">
+          <tbody>
+          <tr>
+            <td class="tblEqual"><b>📱 Pokedex: </b><span id="pokedex"></span></td>
+            <td class="tblEqual"><b>❤️ HP: </b><span id="newPokeHP"></span></td>
+            <td class="tblEqual"><b>💢 Attack: </b><span id="newPokeAttack"></span></td>
+          </tr>
+          </tbody>
+        </table>
+        <br />
+        <p align="center"><b>Type: </b><span id="newPokeType"></span></p>
+        <p align="center"><b>Classifcation: </b><span id="pokeClass"></span></p>
+
         <form class="newPokemon">
-          <div class="form-group">
+          <div class="form-group" align="center">
             <label for="catchNew"></label>
-            <button type="button" class="btn btn-danger" name="catch">Catch It!</button>
-          </div>
-          <div class="form-group">
-            <label for="catchNew"></label>
-            <button type="button" class="btn btn-dark" name="catch">Run Away</button>
+            <button type="button" class="btn btn-lg btn-danger" name="catch" style="margin-right: 15px;">Catch It!</button>
+            <button type="button" class="btn btn-lg btn-primary" name="runAway">Run Away</button>
           </div>
         </form>
       </div>
@@ -43,23 +55,23 @@
               <span class="pokeName" id="poke1"></span>
             </td>
             <td>
-              <button class="pokeball" id="pokemon2" style="border-radius: 50%;"><img src="/assets/img/circle-cropped.png" style="height: 100px;"/></button>
+              <button class="btn btn-primary pokeball" id="pokemon2" style="border-radius: 50%;"><img src="/assets/img/circle-cropped.png" style="height: 100px;"/></button>
               <span class="pokeName" id="poke2"></span>
             </td>
             <td>
-              <button class="pokeball" id="pokemon3" style="border-radius: 50%;"><img src="/assets/img/circle-cropped.png" style="height: 100px;"/></button>
+              <button class="btn btn-primary pokeball" id="pokemon3" style="border-radius: 50%;"><img src="/assets/img/circle-cropped.png" style="height: 100px;"/></button>
               <span class="pokeName" id="poke3"></span>
             </td>
             <td>
-              <button class="pokeball" id="pokemon4" style="border-radius: 50%;"><img src="/assets/img/circle-cropped.png" style="height: 100px;"/></button>
+              <button class="btn btn-primary pokeball" id="pokemon4" style="border-radius: 50%;"><img src="/assets/img/circle-cropped.png" style="height: 100px;"/></button>
               <span class="pokeName" id="poke4"></span>
             </td>
             <td>
-              <button class="pokeball" id="pokemon5" style="border-radius: 50%;"><img src="/assets/img/circle-cropped.png" style="height: 100px;"/></button>
+              <button class="btn btn-primary pokeball" id="pokemon5" style="border-radius: 50%;"><img src="/assets/img/circle-cropped.png" style="height: 100px;"/></button>
               <span class="pokeName" id="poke5"></span>
             </td>
             <td>
-              <button class="pokeball" id="pokemon6" style="border-radius: 50%;"><img src="/assets/img/circle-cropped.png" style="height: 100px;"/></button>
+              <button class="btn btn-primary pokeball" id="pokemon6" style="border-radius: 50%;"><img src="/assets/img/circle-cropped.png" style="height: 100px;"/></button>
               <span class="pokeName" id="poke6"></span>
             </td>
           </tr>
@@ -70,12 +82,32 @@
   </div>
 
   <script>
-      $(document).ready(() => {
+  $(document).ready(() => {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
-  $.get("/api/user_data").then(data => {
-    $(".member-name").text(data.name);
-  });
-});
+      $.get("/api/user_data").then(data => {
+        $(".member-name").text(data.name);
+        console.log("data from line 78" + data)
+      });
+    
+      $.get("/api/pokemon").then(data => {
+      $("#new-poke-name").text(data.name);
+      $("#pokedex").text(data.pokedex_number);
+      $("#newPokeHP").text(data.hp);
+      $("#newPokeType").text(data.type1);
+      $("#newPokeAttack").text(data.attack);
+      $("#pokeClass").text(data.classification);
+      //console.log("data at line 82" + data.name);
+      });
 
+  });
+
+
+      //$.get("/api/pokemon").then(data => {
+        //console.log("data at line 82" + data);
+      //});
+
+        //$("#new-poke-name").text(data.name);
+        //console.log(data);
+        //console.log("line 82 in handlebars: " + data.name);
   </script>
