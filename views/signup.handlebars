@@ -20,10 +20,33 @@
             <label for="exampleInputPassword1"><b>Password</b></label>
             <input type="password" class="form-control" id="password-input" placeholder="Password" name="password">
           </div>
+          <div class="input-group" align="center">
+            <legend>Choose your Starter Pokemon:</legend>
+
+            <input type="radio" class="sr-only" id="charmander" name="starter">
+            <label for="charmander">
+              <img src="assets/img/Charmander.gif" class="starterIcons" />
+            </label>
+
+            <input type="radio" class="sr-only" id="squirtle" name="starter">
+            <label for="squirtle">
+              <img src="assets/img/Squirtle.gif" class="starterIcons" />
+            </label>
+
+            
+            <input type="radio" class="sr-only" id="bulbasaur" name="starter">
+            <label for="bulbasaur">
+              <img src= "assets/img/Bulbasaur.gif" class="starterIcons" />
+            </label>
+
+          </div>
+
           <div style="display: none" id="alert" class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span> <span class="msg"></span>
           </div>
+
+
           <p align="center"><button type="submit" class="btn btn-danger">Sign Up</button></p>
         </form>
         <br />
