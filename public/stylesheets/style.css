@@ -2,3 +2,15 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+
+#bolded {
+  font-weight: bold;
+}
+
+.card-body {
+  background-color: white;
+}
+
+.bolded {
+  font-weight: bold;
+}
