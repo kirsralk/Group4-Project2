@@ -1,11 +1,18 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const nodemailer = require("nodemailer");
+const bodyParser = require("body-parser");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
+
+  // // Body Parser Middleware
+  // app.use(bodyParser.urlencoded({ extended: false }));
+  // app.use(bodyParser.json());
+
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
@@ -19,16 +26,65 @@ module.exports = function(app) {
   // otherwise send back an error
   app.post("/api/signup", (req, res) => {
     db.User.create({
+      name: req.body.name,
       email: req.body.email,
       password: req.body.password
     })
       .then(() => {
+        mailSend(req);
         res.redirect(307, "/api/login");
       })
       .catch(err => {
         res.status(401).json(err);
       });
   });
+
+  function mailSend(req) {
+    const output = `
+                <p>You have signed up for DexMon!!</p>
+                <h3>Dexmon Account </h3>
+                <ul>  
+                  <li>Username: ${req.body.name}</li>
+                  <li>Email: ${req.body.email}</li>
+            
+                </ul>
+                <h3>Message</h3>
+                <p>Welcome to Dexmon! It's time to choose your pokemon! Your adventure awaits.</p>
+              `;
+    // create reusable transporter object using the default SMTP transport
+    const transporter = nodemailer.createTransport({
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: "wallace.ryan50@ethereal.email", // generated ethereal user
+        pass: "tPbC3WC88m8fQwPXte" // generated ethereal password
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    });
+
+    // setup email data with unicode symbols
+    const mailOptions = {
+      from: "'Dexmon' <wallace.ryan50@ethereal.email>", // sender address
+      to: req.body.email, // list of receivers
+      subject: "New Dexmon Account", // Subject line
+      text: "Welcome to Dexmon!", // plain text body
+      html: output // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log("Message sent: %s", info.messageId);
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+      res.render("contact", { msg: "Email has been sent" });
+    });
+  }
 
   // Route for logging user out
   app.get("/logout", (req, res) => {
@@ -45,6 +101,7 @@ module.exports = function(app) {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
+        name: req.user.name,
         email: req.user.email,
         id: req.user.id
       });
