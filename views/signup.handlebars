@@ -7,6 +7,7 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <h2 align="center">New to our app? Sign Up below:</h2>
+        <h3 align="center">Or click <a href="/login">here</a> to log in.</h3>
         <form class="signup">
           <div class="form-group">
             <label for="exampleInputName1"><b>Username</b></label>
@@ -20,37 +21,33 @@
             <label for="exampleInputPassword1"><b>Password</b></label>
             <input type="password" class="form-control" id="password-input" placeholder="Password" name="password">
           </div>
-          <div class="input-group" align="center">
-            <legend>Choose your Starter Pokemon:</legend>
+          <div class="input-group align-center" align="center">
+            <legend align="center"><b>Choose your Starter Pokemon:</b></legend>
 
             <input type="radio" class="sr-only" id="charmander" name="starter">
             <label for="charmander">
-              <img src="assets/img/Charmander.gif" class="starterIcons" />
+              <img src="assets/img/Charmander.png" class="starterIcons" />
             </label>
 
             <input type="radio" class="sr-only" id="squirtle" name="starter">
             <label for="squirtle">
-              <img src="assets/img/Squirtle.gif" class="starterIcons" />
+              <img src="assets/img/Squirtle.png" class="starterIcons" />
             </label>
 
             
             <input type="radio" class="sr-only" id="bulbasaur" name="starter">
             <label for="bulbasaur">
-              <img src= "assets/img/Bulbasaur.gif" class="starterIcons" />
+              <img src= "assets/img/Bulbasaur.png" class="starterIcons" />
             </label>
-
           </div>
 
           <div style="display: none" id="alert" class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span> <span class="msg"></span>
           </div>
-
-
+          <br />
           <p align="center"><button type="submit" class="btn btn-danger">Sign Up</button></p>
         </form>
-        <br />
-        <p align="center">Or log in <a href="/login">here</a></p>
       </div>
     </div>
   </div>
