@@ -3,10 +3,12 @@ const db = require("../models");
 
 module.exports = function(app) {
   // Route to retrieve pokemon
+
   app.get("/api/pokemon", (req, res) => {
+
     db.Pokemon.findOne({
       where: {
-        pokedex_number: 460
+        pokedex_number: Math.floor(Math.random() * 801)
       }
     }).then(dbPokemon => {
       res.json(dbPokemon);

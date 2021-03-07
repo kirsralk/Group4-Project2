@@ -7,7 +7,10 @@ module.exports = function(sequelize, DataTypes) {
       classification: DataTypes.STRING,
       hp: DataTypes.INTEGER,
       name: DataTypes.STRING,
-      pokedex_number: DataTypes.INTEGER,
+      pokedex_number: {
+        type: DataTypes.INTEGER,
+        primaryKey: true
+      },
       type1: DataTypes.STRING
     },
     {
