@@ -19,9 +19,13 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <h3 align="center">A wild <span class="bolded" id="new-poke-name"></span> appeared!</h3>
-        <p align="center"><img src="https://via.placeholder.com/150" /></p>
+
+        <!--Picture generates here-->
+        <p align="center"><img src="" id="pokePic" /></p>
         <br />
-        <table class="table-borderless" align="center" style="table-layout: fixed; color: black;">
+
+        <!--Table with Pokemon stats generates here-->
+        <table class="table table-borderless" align="center" style="table-layout: fixed;">
           <tbody>
           <tr>
             <td class="tblEqual"><b>📱 Pokedex: </b><span id="pokedex"></span></td>
@@ -37,8 +41,8 @@
         <form class="newPokemon">
           <div class="form-group" align="center">
             <label for="catchNew"></label>
-            <button type="button" class="btn btn-lg btn-danger" name="catch" style="margin-right: 15px;">Catch It!</button>
-            <button type="button" class="btn btn-lg btn-primary" name="runAway">Run Away</button>
+            <button type="button" class="btn btn-lg btn-danger" name="catch" id="catch" style="margin-right: 15px;">Catch It!</button>
+            <button type="button" class="btn btn-lg btn-primary" name="runAway" id="runAway">Run Away</button>
           </div>
         </form>
       </div>
@@ -78,36 +82,54 @@
         </tbody>
       </table>
     </div>
-  
+   {{!-- <audio id="battle" src="assets/sounds/107_battle_wild_pokemon.mp3" preload="auto"></audio>
+   <audio id="victory" src="assets/sounds/108_victory.mp3"></audio> --}}
   </div>
 
-  <script>
+<script>
   $(document).ready(() => {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
+
       $.get("/api/user_data").then(data => {
         $(".member-name").text(data.name);
         console.log("data from line 78" + data)
       });
-    
+  
+  // Display stats of retrieved Pokemon from db  
       $.get("/api/pokemon").then(data => {
-      $("#new-poke-name").text(data.name);
-      $("#pokedex").text(data.pokedex_number);
-      $("#newPokeHP").text(data.hp);
-      $("#newPokeType").text(data.type1);
-      $("#newPokeAttack").text(data.attack);
-      $("#pokeClass").text(data.classification);
-      //console.log("data at line 82" + data.name);
+        $("#new-poke-name").text(data.name);
+        $("#pokedex").text(data.pokedex_number);
+        $("#newPokeHP").text(data.hp);
+        $("#newPokeType").text(data.type1);
+        $("#newPokeAttack").text(data.attack);
+        $("#pokeClass").text(data.classification);
+  
+
+  // Display photo of pokemon from pokemondb.net
+        var lowerName = data.name.toLowerCase();
+        var picURL = "https://img.pokemondb.net/sprites/home/normal/" + lowerName + ".png";
+        console.log (picURL);
+        $("#pokePic").attr("src", picURL);
       });
 
+      
+
+  // Play battle music on page load
+      //var battle = document.getElementById("battle");
+      //battle.play();
   });
 
+  var victory = document.getElementById("victory");
 
-      //$.get("/api/pokemon").then(data => {
-        //console.log("data at line 82" + data);
-      //});
+  $("#catch").click(function() {
+  //alert("this button works!");
+    victory.play();
+    battle.pause();
+  });
 
-        //$("#new-poke-name").text(data.name);
-        //console.log(data);
-        //console.log("line 82 in handlebars: " + data.name);
-  </script>
+  $("#runAway").click(function() {
+    location.reload();
+  });
+
+</script>
