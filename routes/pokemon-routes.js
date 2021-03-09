@@ -8,7 +8,7 @@ module.exports = function(app) {
 
     db.Pokemon.findOne({
       where: {
-        pokedex_number: Math.floor(Math.random() * 801)
+        pokedex_number: Math.floor(Math.random() * 151)
       }
     }).then(dbPokemon => {
       res.json(dbPokemon);
