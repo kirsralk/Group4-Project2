@@ -36,5 +36,14 @@ module.exports = function(sequelize, DataTypes) {
       null
     );
   });
+
+  User.associate = function(models) {
+    //Associating User with party
+    //When User is deleted then Party is deleted
+    User.hasOne(models.Party, {
+      onDelete: "cascade"
+    });
+  };
+
   return User;
 };

@@ -5,7 +5,6 @@ module.exports = function(app) {
   // Route to retrieve pokemon
 
   app.get("/api/pokemon", (req, res) => {
-
     db.Pokemon.findOne({
       where: {
         pokedex_number: Math.floor(Math.random() * 151)
@@ -14,5 +13,4 @@ module.exports = function(app) {
       res.json(dbPokemon);
     });
   });
-
 }; //Close module export

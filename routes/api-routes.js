@@ -32,6 +32,7 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
+  // function partyCreate()
 
   function mailSend(req) {
     const output = `
