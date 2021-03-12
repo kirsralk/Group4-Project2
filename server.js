@@ -40,8 +40,7 @@ require("./routes/pokemon-routes")(app);
 // Syncing our database and logging a message to the user upon success
 db.sequelize
   .sync({
-    force: false,
-    alter: true
+    force: false
   })
   .then(() => {
     app.listen(PORT, () => {
