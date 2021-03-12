@@ -26,13 +26,19 @@ module.exports = function(app) {
     })
       .then(() => {
         mailSend(req);
+        partyCreate(res);
         res.redirect(307, "/api/login");
       })
       .catch(err => {
         res.status(401).json(err);
       });
   });
-  // function partyCreate()
+  function partyCreate(res) {
+    // db.Party.create({
+
+    // });
+    console.log(res.req.body.name);
+  }
 
   function mailSend(req) {
     const output = `

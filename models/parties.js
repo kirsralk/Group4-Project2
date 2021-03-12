@@ -1,26 +1,26 @@
 module.exports = function(sequelize, DataTypes) {
-  const Poke_Parties_Map = sequelize.define(
-    "Poke_Parties_Map",
+  const Parties = sequelize.define(
+    "Parties",
     {
       id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+        defaultValue: DataTypes.INTEGER,
         allowNull: false
       },
-      pokemonId: {
+      pokeId: {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      partyId: {
+      userId: {
         type: DataTypes.INTEGER,
         allowNull: false
       }
     },
     {}
   );
-  Poke_Parties_Map.associate = function(models) {
+  Parties.associate = function(models) {
     // associations can be defined here
   };
-  return Poke_Parties_Map;
+  return Parties;
 };

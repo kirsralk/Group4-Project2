@@ -3,6 +3,11 @@ const bcrypt = require("bcryptjs");
 // Creating our User model
 module.exports = function(sequelize, DataTypes) {
   const User = sequelize.define("User", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -40,9 +45,16 @@ module.exports = function(sequelize, DataTypes) {
   User.associate = function(models) {
     //Associating User with party
     //When User is deleted then Party is deleted
-    User.hasOne(models.Party, {
-      onDelete: "cascade"
+    // User.hasOne(models.Party, {
+    //   onDelete: "cascade"
+    // });
+    User.belongsToMany(models.Pokemon, {
+      through: "Parties",
+      as: "user",
+      foreignKey: "userId"
+      //other key: 'pokeId'
     });
+
   };
 
   return User;
