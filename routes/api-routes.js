@@ -19,22 +19,25 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", (req, res) => {
+    console.log(req.body);
     db.User.create({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      pokemon1: 1
     })
       .then(() => {
         mailSend(req);
-        partyCreate(res);
+        // partyCreate(res);
         res.redirect(307, "/api/login");
       })
       .catch(err => {
         res.status(401).json(err);
       });
   });
-  function partyCreate(res) {
-    // db.Party.create({
+  // function partyCreate(res) {
+  //   // db.Party.create({
+
 
     // });
     console.log(res.req.body.id);
@@ -44,6 +47,15 @@ module.exports = function(app) {
     const output = `
                 <p>You have signed up for Pokemon Stay!!</p>
                 <h3>Pokemon Stay Account </h3>
+=======
+  //   // });
+  //   console.log(res.req.body.name);
+  // }
+
+  function mailSend(req) {
+    const output = `
+                <p>You have signed up for Pokemon STAY!!</p>
+                <h3>Your Account:</h3>
                 <ul>  
                   <li>Username: ${req.body.name}</li>
                   <li>Email: ${req.body.email}</li>
@@ -51,6 +63,9 @@ module.exports = function(app) {
                 </ul>
                 <h3>Message</h3>
                 <p>Welcome to Pokemon Stay! It's time to choose your pokemon! Your adventure awaits.</p>
+
+                <p>Welcome to Pokemon STAY! It's time to choose your pokemon! Your adventure awaits.</p>
+
               `;
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
@@ -68,10 +83,17 @@ module.exports = function(app) {
 
     // setup email data with unicode symbols
     const mailOptions = {
+
       from: "'Pokemon Stay' <tester9191@hotmail.com>", // sender address
       to: req.body.email, // list of receivers
       subject: "New Pokemon Stay Account", // Subject line
       text: "Welcome to Pokemon Stay!", // plain text body
+
+      from: "'Pokemon Stay' <wallace.ryan50@ethereal.email>", // sender address
+      to: req.body.email, // list of receivers
+      subject: "New Pokemon STAY Account", // Subject line
+      text: "Welcome to Pokemon STAY!", // plain text body
+
       html: output // html body
     };
 
@@ -104,7 +126,8 @@ module.exports = function(app) {
       res.json({
         name: req.user.name,
         email: req.user.email,
-        id: req.user.id
+        id: req.user.id,
+        pokemon1: req.user.pokemon1
       });
     }
   });

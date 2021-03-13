@@ -21,21 +21,21 @@
             <label for="exampleInputPassword1"><b>Password</b></label>
             <input type="password" class="form-control" id="password-input" placeholder="Password" name="password">
           </div>
-          <div class="input-group align-center" align="center">
+          <div class="form-group align-center" align="center">
             <legend align="center"><b>Choose your Starter Pokemon:</b></legend>
 
-            <input type="radio" class="sr-only" id="charmander" name="starter">
+            <input type="radio" class="sr-only" id="charmander" name="starter" value="4">
             <label for="charmander">
               <img src="/assets/img/charmander.png" class="starterIcons" />
             </label>
 
-            <input type="radio" class="sr-only" id="squirtle" name="starter">
+            <input type="radio" class="sr-only" id="squirtle" name="starter" value="7">
             <label for="squirtle">
               <img src="/assets/img/squirtle.png" class="starterIcons" />
             </label>
 
             
-            <input type="radio" class="sr-only" id="bulbasaur" name="starter">
+            <input type="radio" class="sr-only" id="bulbasaur" name="starter" value="1">
             <label for="bulbasaur">
               <img src= "/assets/img/bulbasaur.png" class="starterIcons" />
             </label>
@@ -58,7 +58,8 @@
   const signUpForm = $("form.signup");
   const emailInput = $("input#email-input");
   const passwordInput = $("input#password-input");
-  const nameInput = $("input#name-input")
+  const nameInput = $("input#name-input");
+  const pokemon1Input = $("input[name='starter']:checked");
 
 
   // When the signup button is clicked, we validate the email and password are not blank
@@ -67,29 +68,31 @@
     const userData = {
       name: nameInput.val().trim(),
       email: emailInput.val().trim(),
-      password: passwordInput.val().trim()
+      password: passwordInput.val().trim(),
+      pokemon1: pokemon1Input.val()
     };
+
+    console.log("userData:" + userData);
 
     if (!userData.email || !userData.password) {
       return;
     }
     // If we have an email and password, run the signUpUser function
-    signUpUser(userData.name, userData.email, userData.password);
+    signUpUser(userData.name, userData.email, userData.password, userData.pokemon1);
     nameInput.val("");
     emailInput.val("");
     passwordInput.val("");
-
-
-    
+    pokemon1Input.val("");
   });
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
-  function signUpUser(name, email, password) {
+  function signUpUser(name, email, password, pokemon1) {
     $.post("/api/signup", {
       name: name,
       email: email,
-      password: password
+      password: password,
+      pokemon1: pokemon1
     })
       .then(() => {
         window.location.replace("/members");
