@@ -17,7 +17,7 @@ form.login {
 
 .tblEqual {
   align-content: center;
-  width: 33%;
+  width: 16.67%;
   padding-left: 10px;
 }
 
@@ -50,4 +50,16 @@ footer {
 
 a {
   color: black;
+}
+
+mark {
+  background-color: white !important;
+}
+
+legend {
+  border-bottom: none !important;
+}
+
+table {
+  align-content: center !important;
 }
