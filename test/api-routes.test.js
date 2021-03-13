@@ -13,12 +13,3 @@ test('Should signup for a user', async () => {
   .expect(htmlRoutes)
 })
 
-test('Should log user out', async () => {
-  await request(app).post('/users')
-  .send({
-    name: 'test',
-    email: 'test@tet.com',
-    password: 'test123'
-  })
-  .expect(htmlRoutes)
-})
