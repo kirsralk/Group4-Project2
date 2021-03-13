@@ -35,22 +35,14 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
-  // function partyCreate(res) {
-  //   // db.Party.create({
 
-
-    // });
-    console.log(res.req.body.id);
-  }
 
   function mailSend(req) {
     const output = `
                 <p>You have signed up for Pokemon Stay!!</p>
                 <h3>Pokemon Stay Account </h3>
-=======
-  //   // });
-  //   console.log(res.req.body.name);
-  // }
+
+ });
 
   function mailSend(req) {
     const output = `
