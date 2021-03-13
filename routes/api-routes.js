@@ -37,29 +37,29 @@ module.exports = function(app) {
     // db.Party.create({
 
     // });
-    console.log(res.req.body.name);
+    console.log(res.req.body.id);
   }
 
   function mailSend(req) {
     const output = `
-                <p>You have signed up for DexMon!!</p>
-                <h3>Dexmon Account </h3>
+                <p>You have signed up for Pokemon Stay!!</p>
+                <h3>Pokemon Stay Account </h3>
                 <ul>  
                   <li>Username: ${req.body.name}</li>
                   <li>Email: ${req.body.email}</li>
             
                 </ul>
                 <h3>Message</h3>
-                <p>Welcome to Dexmon! It's time to choose your pokemon! Your adventure awaits.</p>
+                <p>Welcome to Pokemon Stay! It's time to choose your pokemon! Your adventure awaits.</p>
               `;
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
+      host: "smtp.live.com",
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: "wallace.ryan50@ethereal.email", // generated ethereal user
-        pass: "tPbC3WC88m8fQwPXte" // generated ethereal password
+        user: "tester9191@hotmail.com", // generated ethereal user
+        pass: "Testpassword1!" // generated ethereal password
       },
       tls: {
         rejectUnauthorized: false
@@ -68,10 +68,10 @@ module.exports = function(app) {
 
     // setup email data with unicode symbols
     const mailOptions = {
-      from: "'Dexmon' <wallace.ryan50@ethereal.email>", // sender address
+      from: "'Pokemon Stay' <tester9191@hotmail.com>", // sender address
       to: req.body.email, // list of receivers
-      subject: "New Dexmon Account", // Subject line
-      text: "Welcome to Dexmon!", // plain text body
+      subject: "New Pokemon Stay Account", // Subject line
+      text: "Welcome to Pokemon Stay!", // plain text body
       html: output // html body
     };
 
