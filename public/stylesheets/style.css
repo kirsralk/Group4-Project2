@@ -42,3 +42,12 @@ input[type="radio"]:checked + label {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+footer {
+  display: block;
+  text-align: center;
+}
+
+a {
+  color: black;
+}
