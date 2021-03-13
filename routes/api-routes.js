@@ -38,6 +38,16 @@ module.exports = function(app) {
   // function partyCreate(res) {
   //   // db.Party.create({
 
+
+    // });
+    console.log(res.req.body.id);
+  }
+
+  function mailSend(req) {
+    const output = `
+                <p>You have signed up for Pokemon Stay!!</p>
+                <h3>Pokemon Stay Account </h3>
+=======
   //   // });
   //   console.log(res.req.body.name);
   // }
@@ -52,16 +62,19 @@ module.exports = function(app) {
             
                 </ul>
                 <h3>Message</h3>
+                <p>Welcome to Pokemon Stay! It's time to choose your pokemon! Your adventure awaits.</p>
+
                 <p>Welcome to Pokemon STAY! It's time to choose your pokemon! Your adventure awaits.</p>
+
               `;
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
+      host: "smtp.live.com",
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: "wallace.ryan50@ethereal.email", // generated ethereal user
-        pass: "tPbC3WC88m8fQwPXte" // generated ethereal password
+        user: "tester9191@hotmail.com", // generated ethereal user
+        pass: "Testpassword1!" // generated ethereal password
       },
       tls: {
         rejectUnauthorized: false
@@ -70,10 +83,17 @@ module.exports = function(app) {
 
     // setup email data with unicode symbols
     const mailOptions = {
+
+      from: "'Pokemon Stay' <tester9191@hotmail.com>", // sender address
+      to: req.body.email, // list of receivers
+      subject: "New Pokemon Stay Account", // Subject line
+      text: "Welcome to Pokemon Stay!", // plain text body
+
       from: "'Pokemon Stay' <wallace.ryan50@ethereal.email>", // sender address
       to: req.body.email, // list of receivers
       subject: "New Pokemon STAY Account", // Subject line
       text: "Welcome to Pokemon STAY!", // plain text body
+
       html: output // html body
     };
 
